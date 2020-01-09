@@ -11,6 +11,7 @@ const DisplayCooperResult = ({
   entryHandler
 }) => {
   const result = cooperCalculator(distance, gender, age);
+  console.log(result)
 
   const propsPassed = distance && age ? true : false;
   let renderSaveEntry;
