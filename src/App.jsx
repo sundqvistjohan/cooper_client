@@ -43,19 +43,19 @@ class App extends Component {
     if (authenticated && renderIndex) {
       performanceDataIndex = (
         <>
-          <DisplayPerformanceData
-            updateIndex={this.state.updateIndex}
-            indexUpdated={() => this.setState({ updateIndex: false })}
-          />
           <button
             className="ui button"
             onClick={() => this.setState({ renderIndex: false })}
           >
             Hide past entries
           </button>
+          <DisplayPerformanceData
+            updateIndex={this.state.updateIndex}
+            indexUpdated={() => this.setState({ updateIndex: false })}
+          />
         </>
       );
-    } else {
+    } else if (authenticated && !renderIndex) {
       performanceDataIndex = (
         <button
           id="show-index"
@@ -76,7 +76,6 @@ class App extends Component {
           submitFormHandler={this.onLogin}
         />
         <InputFields onChangeHandler={this.onChangeHandler} />
-        {performanceDataIndex}
         <DisplayCooperResult
           distance={this.state.distance}
           gender={this.state.gender}
@@ -86,7 +85,8 @@ class App extends Component {
           entryHandler={() =>
             this.setState({ entrySaved: true, updateIndex: true })
           }
-        />
+          />
+          {performanceDataIndex}
       </div>
     );
   }

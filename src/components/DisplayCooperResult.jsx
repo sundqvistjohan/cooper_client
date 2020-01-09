@@ -13,6 +13,21 @@ const DisplayCooperResult = ({
   const result = cooperCalculator(distance, gender, age);
 
   const propsPassed = distance && age ? true : false;
+  let renderSaveEntry;
+  
+  if (authenticated && !entrySaved) {
+    renderSaveEntry = (
+    <button
+      id="save-result"
+      className="ui green button"
+      onClick={() => saveData(result, entryHandler)}
+      >
+        Save entry
+      </button>
+    )
+  } else if (authenticated && entrySaved) {
+    renderSaveEntry = <p id="response-message">Your entry was saved</p>
+  }
 
   return (
     <>
@@ -22,16 +37,7 @@ const DisplayCooperResult = ({
             {age} y/o {gender} running {distance} meters.
           </p>
           <p id="cooper-result">Result: {result}</p>
-          {authenticated && !entrySaved ? (
-            <button
-              id="save-result"
-              onClick={() => saveData(result, entryHandler)}
-              >
-                Save entry
-              </button>
-          ) : (
-            <p id="response-message">Your entry was saved</p>
-          )}
+          {renderSaveEntry}
         </>
       )}
     </>
