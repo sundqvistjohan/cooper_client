@@ -1,5 +1,6 @@
 import React from "react";
 import cooperCalculator from "../modules/cooperCalculator";
+import ProgressBar from "./ProgressBar"
 import { saveData } from "../modules/performanceData";
 
 const DisplayCooperResult = ({ 
@@ -10,8 +11,8 @@ const DisplayCooperResult = ({
   entrySaved,
   entryHandler
 }) => {
+  
   const result = cooperCalculator(distance, gender, age);
-  console.log(result)
 
   const propsPassed = distance && age ? true : false;
   let renderSaveEntry;
@@ -37,8 +38,9 @@ const DisplayCooperResult = ({
           <p id="cooper-message">
             {age} y/o {gender} running {distance} meters.
           </p>
-          <p id="cooper-result">Result: {result}</p>
+          <p id="cooper-result">Result: {result[0]}</p>
           {renderSaveEntry}
+          <ProgressBar percentOfMax={result[1]} distanceArray={result[2]} />
         </>
       )}
     </>

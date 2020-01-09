@@ -1,0 +1,11 @@
+#progress-bar {
+  border: 1px solid;
+  height: 24px;
+  position: relative;
+}
+
+#filler {
+  background: green;
+  height: 100%;
+}
+
