@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import DisplayCooperResult from "./components/DisplayCooperResult";
 import Header from "./components/Header";
 import InputFields from "./components/InputFields";
-import LoginForm from "./components/LoginForm";
 import DisplayPerformanceData from "./components/DisplayPerformanceData";
 import { authenticate } from "./modules/auth";
 
