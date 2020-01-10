@@ -5,7 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import axios from "axios";
 
-axios.defaults.baseURL = "https://jsundq-cooper-api.herokuapp.com/api/v1"
+axios.defaults.baseURL = process.env.REACT_APP_BASEURL
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
