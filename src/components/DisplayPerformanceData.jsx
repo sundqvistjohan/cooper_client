@@ -33,7 +33,7 @@ class DisplayPerformanceData extends Component {
             let indexDate = item.updated_at
             indexDate = indexDate.substring(0, indexDate.indexOf("T"));
             
-            return <div key={item.id}>{indexDate}: {item.data.message}</div>
+            return <div key={item.id}>{indexDate}: Distance: {item.data.distance} Rating: {item.data.message}</div>
           })}
         </>
       )
