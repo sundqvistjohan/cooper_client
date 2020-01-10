@@ -44,7 +44,7 @@ class DisplayPerformanceData extends Component {
       <div id="index">
         <h3>Your fitness progress:</h3>
         {dataIndex}
-        <PerformanceChart performanceData={this.performanceData} />
+        <PerformanceChart performanceData={this.state.performanceData} />
       </div>
     )
   }      

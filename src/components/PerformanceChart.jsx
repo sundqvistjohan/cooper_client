@@ -2,41 +2,63 @@ import React from "react";
 import { Line } from "react-chartjs-2";
 
 const PerformanceChart = ({ performanceData }) => {
-  console.log(performanceData)
-  
+  let renderChart;
+  let dates = [];
+  let distances = [];
+  let ratings = [];
+
+  if (performanceData !== null) {
+    dates = performanceData.map(item => item.updated_at.split("T")[0]);
+    distances = performanceData.map(item => item.data.distance);
+    ratings = performanceData.map(item => item.updated_at);
+  }
+
   const data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: dates,
     datasets: [
       {
-        label: "My First dataset",
+        label: "",
         fill: true,
         lineTension: 0.1,
-        backgroundColor: "rgba(75,192,192,0.4)",
-        borderColor: "rgba(75,192,192,1)",
+        backgroundColor: "rgba(34,186,69,0.4)",
+        borderColor: "rgba(34,186,69,1)",
         borderCapStyle: "butt",
-        borderDash: [],
-        borderDashOffset: 0.0,
-        borderJoinStyle: "miter",
-        pointBorderColor: "rgba(75,192,192,1)",
+        pointBorderColor: "rgb(169,169,169,1)",
         pointBackgroundColor: "#fff",
-        pointBorderWidth: 1,
-        pointHoverRadius: 5,
-        pointHoverBackgroundColor: "rgba(75,192,192,1)",
+        pointBorderWidth: 5,
+        pointHoverRadius: 10,
         pointHoverBorderColor: "rgba(220,220,220,1)",
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
-        data: [65, 59, 80, 81, 56, 55, 40]
+        data: distances
       }
     ]
   };
 
+  let options={
+    legend: {
+        display: false,
+    },
+  };
+
+  if (performanceData) {
+    renderChart = (
+      <>
+        <h2>Chart</h2>
+        <Line data={data} options={options} />
+      </>
+    );
+  } else {
+    renderChart = (
+      <p>You have no saved performances</p>
+    )
+  }
   return (
-    <div>
-      <h2>Line Example</h2>
-      <Line data={data} />
-    </div>
-  );
+    <>
+    {renderChart}
+    </>
+  )
 };
 
 export default PerformanceChart;
