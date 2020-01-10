@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { getData } from "../modules/performanceData";
+import PerformanceChart from "./PerformanceChart"
 
 class DisplayPerformanceData extends Component {
   state = {
@@ -43,6 +44,7 @@ class DisplayPerformanceData extends Component {
       <div id="index">
         <h3>Your fitness progress:</h3>
         {dataIndex}
+        <PerformanceChart performanceData={this.performanceData} />
       </div>
     )
   }      
