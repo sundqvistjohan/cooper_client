@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import DisplayCooperResult from './components/DisplayCooperResult';
-import InputFields from "./components/InputFields"
-import LoginForm from "./components/LoginForm"
-import DisplayPerformanceData from "./components/DisplayPerformanceData"
-import { authenticate } from './modules/auth';
+import React, { Component } from "react";
+import DisplayCooperResult from "./components/DisplayCooperResult";
+import Header from "./components/Header";
+import InputFields from "./components/InputFields";
+import DisplayPerformanceData from "./components/DisplayPerformanceData";
+import { authenticate } from "./modules/auth";
 
 class App extends Component {
   state = {
@@ -19,7 +19,7 @@ class App extends Component {
   };
 
   onChangeHandler = e => {
-    this.setState({ [e.target.name]: e.target.value, entrySaved: false })
+    this.setState({ [e.target.name]: e.target.value, entrySaved: false });
   };
 
   onLogin = async e => {
@@ -36,63 +36,57 @@ class App extends Component {
   };
 
   render() {
-    const { renderLoginForm, authenticated, message } = this.state;
-    let renderLogin;
+    const { authenticated, renderIndex } = this.state;
     let performanceDataIndex;
 
-    switch(true) {
-      case renderLoginForm && !authenticated:
-        renderLogin = <LoginForm submitFormHandler={this.onLogin} />;
-        break;
-      case !renderLoginForm && !authenticated:
-        renderLogin = (
-          <>
-            <button
-              id="login"
-              onClick={() => this.setState({ renderLoginForm: true })}
-            >
-              Login
-            </button>
-            <p id="message">{message}</p>
-          </>
-        );
-        break;
-      case authenticated:
-        renderLogin = (
-          <p id="message">Hi {JSON.parse(sessionStorage.getItem("credentials")).uid}</p>
-        );
-        if (this.state.renderIndex) {
-          performanceDataIndex = (
-            <>
-              <DisplayPerformanceData
-                updateIndex={this.state.updateIndex}
-                indexUpdated={() => this.setState({ updateIndex: false })}
-              />
-              <button onClick={() => this.setState({ renderIndex: false })}>Hide past entries</button>
-            </>
-          )
-        } else {
-          performanceDataIndex = (
-            <button id="show-index" onClick={() => this.setState({ renderIndex: true })}>Show past entries</button>
-          )
-        }
-        break;
+    if (authenticated && renderIndex) {
+      performanceDataIndex = (
+        <>
+          <button
+            className="ui button"
+            onClick={() => this.setState({ renderIndex: false })}
+          >
+            Hide past entries
+          </button>
+          <DisplayPerformanceData
+            updateIndex={this.state.updateIndex}
+            indexUpdated={() => this.setState({ updateIndex: false })}
+          />
+        </>
+      );
+    } else if (authenticated && !renderIndex) {
+      performanceDataIndex = (
+        <button
+          id="show-index"
+          className="ui button"
+          onClick={() => this.setState({ renderIndex: true })}
+        >
+          Show past entries
+        </button>
+      );
     }
 
     return (
-      <>
+      <div className="ui main container">
+        <Header
+          renderLoginForm={this.state.renderLoginForm}
+          authenticated={this.state.authenticated}
+          loginButtonHandler={() => this.setState({ renderLoginForm: true })}
+          submitFormHandler={this.onLogin}
+        />
         <InputFields onChangeHandler={this.onChangeHandler} />
-        {renderLogin}
-        {performanceDataIndex}      
         <DisplayCooperResult
           distance={this.state.distance}
           gender={this.state.gender}
           age={this.state.age}
           authenticated={this.state.authenticated}
           entrySaved={this.state.entrySaved}
-          entryHandler={() => this.setState({ entrySaved: true, updateIndex: true })}
+          entryHandler={() =>
+            this.setState({ entrySaved: true, updateIndex: true })
+          }
           />
-      </>
+          {performanceDataIndex}
+      </div>
     );
   }
 }

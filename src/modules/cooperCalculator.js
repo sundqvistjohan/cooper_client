@@ -58,6 +58,9 @@ const CooperCalculator = (distance, gender, age) => {
   const distanceRanges = cooperTable[gender.toLowerCase()][ageRange];
 
   let ratingIndex;
+  let distanceValue;
+  let distanceRangeExport = [];
+  let percentOfMax;
 
   distanceRanges.forEach((dRange, index) => {
     if (
@@ -65,17 +68,33 @@ const CooperCalculator = (distance, gender, age) => {
       (dRange.match(/<\d*/) && distance < parseInt(dRange.slice(1), 10))
     ) {
       ratingIndex = index;
+      distanceValue = parseInt(dRange.replace(/>|</g,''), 10)
     } else {
       const minMax = dRange.split("-");
       const min = parseInt(minMax[0], 10);
       const max = parseInt(minMax[1], 10);
+      
+      if (dRange.match(/>\d*/)) {
+        distanceValue = parseInt(dRange.slice(1), 10)
+      } else {
+        distanceValue = min;
+      }
 
       if (distance >= min && distance <= max) {
         ratingIndex = index;
       }
     }
+
+    distanceRangeExport.push(distanceValue)
   });
-  return ratings[ratingIndex];
+
+  if (distance >= distanceRangeExport[0]) {
+    percentOfMax = 100;
+  } else {
+    percentOfMax = ((distance / distanceRangeExport[0]) * 100).toFixed(0)
+  }
+
+  return [ratings[ratingIndex], percentOfMax, distanceRangeExport.slice(0,-1)];
 };
 
 export default CooperCalculator;
