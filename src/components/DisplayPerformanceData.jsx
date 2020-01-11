@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { getData } from "../modules/performanceData";
+import PerformanceChart from "./PerformanceChart"
 
 class DisplayPerformanceData extends Component {
   state = {
@@ -33,7 +34,7 @@ class DisplayPerformanceData extends Component {
             let indexDate = item.updated_at
             indexDate = indexDate.substring(0, indexDate.indexOf("T"));
             
-            return <div key={item.id}>{indexDate}: {item.data.message}</div>
+            return <div key={item.id}>{indexDate}: Distance: {item.data.distance} Rating: {item.data.message}</div>
           })}
         </>
       )
@@ -43,6 +44,7 @@ class DisplayPerformanceData extends Component {
       <div id="index">
         <h3>Your fitness progress:</h3>
         {dataIndex}
+        <PerformanceChart performanceData={this.state.performanceData} />
       </div>
     )
   }      

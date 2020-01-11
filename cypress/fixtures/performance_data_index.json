@@ -2,24 +2,30 @@
   "entries": [
     {
       "data": {
-        "message": "Below Average"
+        "message": "Below Average",
+        "distance": "1756"
       },
       "id": 1,
-      "user_id": 1
+      "user_id": 1,
+      "updated_at": "2018-08-04T08:21:27.183Z"
     },
     {
       "data": {
-        "message": "Average"
+        "message": "Average",
+        "distance": "2020"
       },
       "id": 2,
-      "user_id": 1
+      "user_id": 1,
+      "updated_at": "2019-05-15T08:21:27.183Z"
     },
     {
       "data": {
-        "message": "Above Average"
+        "message": "Above Average",
+        "distance": "2650"
       },
       "id": 3,
-      "user_id": 1
+      "user_id": 1,
+      "updated_at": "2019-09-24T08:21:27.183Z"
     }
   ]
 }

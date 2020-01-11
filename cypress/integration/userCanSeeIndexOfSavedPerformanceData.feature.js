@@ -27,9 +27,9 @@ describe('User attempts to view his/her performance data', () => {
   it('successfully', async () => {
     cy.get('#show-index').click()
     cy.get('#index').within(() => {
-      cy.contains('Below Average')
-      cy.contains('Average')
-      cy.contains('Above Average')
+      cy.contains('Distance: 1756 Rating: Below Average')
+      cy.contains('Distance: 2020 Rating: Average')
+      cy.contains('Distance: 2650 Rating: Above Average')
     })
   })
 })
