@@ -1,19 +1,41 @@
 import React from "react";
-import { Line } from "react-chartjs-2";
+import { Line, Pie } from "react-chartjs-2";
 
 const PerformanceChart = ({ performanceData }) => {
   let renderChart;
   let dates = [];
   let distances = [];
   let ratings = [];
+  let ratingsCount = [];
+  let ratingsLabel = [];
+  let ratingsLabelValid = [];
+  let ratingsCountValid = [];
 
   if (performanceData !== null) {
     dates = performanceData.map(item => item.updated_at.split("T")[0]);
     distances = performanceData.map(item => item.data.distance);
-    ratings = performanceData.map(item => item.updated_at);
+    ratings = performanceData.map(item => item.data.message);
+    ratingsCount = [
+      ratings.filter(rating => rating.match("Poor")).length,
+      ratings.filter(rating => rating.match("Below average")).length,
+      ratings.filter(rating => rating.match("Average")).length,
+      ratings.filter(rating => rating.match("Above average")).length,
+      ratings.filter(rating => rating.match("Excellent")).length
+    ].reverse();
+    ratingsLabel = ["Poor", "Below average", "Average", "Above Average", "Excellent"].reverse()
+
+    
+
+    ratingsCount.forEach((item, index) => {
+      if (item !== 0) {
+        ratingsLabelValid.push(ratingsLabel[index])
+        ratingsCountValid.push(ratingsCount[index])
+      }
+    })
+
   }
 
-  const data = {
+  const lineChartData = {
     labels: dates,
     datasets: [
       {
@@ -35,30 +57,68 @@ const PerformanceChart = ({ performanceData }) => {
       }
     ]
   };
+  const pieChartData = {
+    labels: ratingsLabelValid,
+    datasets: [
+      {
+        label: "My First dataset",
+        backgroundColor: [
+          'green',
+          'lime',
+          'yellow',
+          'orange',
+          'red'
+          ],
+        data: ratingsCountValid
+      }
+    ]
+  };
 
-  let options={
+  const lineChartOptions = {
     legend: {
-        display: false,
+      display: false
     },
+    scales: {
+      xAxes: [{
+        display: true,
+        scaleLabel: {
+          display: true,
+          labelString: 'Date'
+        },
+        gridLines: {
+          color: "rgba(0, 0, 0, 0)",
+        }
+      }],
+      yAxes: [{
+        display: true,
+        scaleLabel: {
+          display: true,
+          labelString: 'Distance'
+        },
+        gridLines: {
+          color: "rgba(0, 0, 0, 0)",
+        }
+      }]
+    }
   };
 
   if (performanceData) {
     renderChart = (
-      <>
-        <h2>Chart</h2>
-        <Line data={data} options={options} />
-      </>
+      <div className="ui stackable two column grid">
+        <div className="column">
+          <h2>Your progress</h2>
+          <Line data={lineChartData} options={lineChartOptions} />
+        </div>
+        <div className="column">
+          <h2>Your fitness ratings</h2>
+          <Pie data={pieChartData} />
+        </div>
+      </div>
     );
   } else {
-    renderChart = (
-      <p>You have no saved performances</p>
-    )
+    renderChart = <p>You have no saved performances</p>;
   }
-  return (
-    <>
-    {renderChart}
-    </>
-  )
+  return <>{renderChart}</>;
 };
 
 export default PerformanceChart;
