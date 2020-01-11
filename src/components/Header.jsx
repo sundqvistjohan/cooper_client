@@ -12,7 +12,7 @@ const Header = props => {
         <>
           <button
             id="login"
-            className="ui green button"
+            className="ui inverted orange button"
             onClick={() => props.loginButtonHandler()}
           >
             Login
@@ -31,9 +31,9 @@ const Header = props => {
   }
 
   return (
-    <div className="ui two column grid">
+    <div id="header" className="ui two column grid">
       <div className="column">
-        <h1 className="ui header">Cooper test</h1>
+        <h1 className="ui inverted dividing header">Cooper fitness calculator</h1>
       </div>
       <div className="right aligned column">{renderLogin}</div>
     </div>

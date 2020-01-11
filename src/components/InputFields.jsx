@@ -2,7 +2,8 @@ import React from "react";
 
 const InputFields = ({ onChangeHandler }) => {
   return (
-    <div className="ui form">
+    <div className="ui inverted form">
+      <p>The Cooper physical fitness test is performed by running as far as you can in 12 minutes. After performing the test enter your achieved distance, your gender and your age below to receive your fitness rating.</p>
       <div className="three fields">
         <div className="field">
           <label>Distance</label>

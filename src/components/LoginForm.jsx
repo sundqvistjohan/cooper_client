@@ -2,7 +2,7 @@ import React from "react";
 
 const LoginForm = ({ submitFormHandler }) => {
   return (
-    <form onSubmit={submitFormHandler} id="login-form" className="ui form">
+    <form onSubmit={submitFormHandler} id="login-form" className="ui inverted form">
       <div className="field">
         <label>Email</label>
         <input name="email" type="email" id="email"></input>
@@ -11,7 +11,7 @@ const LoginForm = ({ submitFormHandler }) => {
         <label>Password</label>
         <input name="password" type="password" id="password"></input>
       </div>
-      <button id="submit" className="ui button">Submit</button>
+      <button id="submit" className="ui inverted orange button">Submit</button>
     </form>
   );
 };

@@ -21,26 +21,26 @@ const DisplayCooperResult = ({
     renderSaveEntry = (
     <button
       id="save-result"
-      className="ui green button"
+      className="ui inverted large basic green button"
       onClick={() => saveData(result[0], distance, entryHandler)}
       >
-        Save entry
+        Save result
       </button>
     )
   } else if (authenticated && entrySaved) {
-    renderSaveEntry = <p id="response-message">Your entry was saved</p>
+    renderSaveEntry = <p id="response-message">Your result was saved</p>
   }
 
   return (
     <>
       {propsPassed && (
         <>
+          <h3>Result</h3>
           <p id="cooper-message">
-            {age} y/o {gender} running {distance} meters.
+            Running {distance} meters in 12 minutes as a {age} year old {gender} is <strong>{result[0]}</strong>.
           </p>
-          <p id="cooper-result">Result: {result[0]}</p>
-          {renderSaveEntry}
           <ProgressBar percentOfMax={result[1]} distanceArray={result[2]} />
+          {renderSaveEntry}
         </>
       )}
     </>

@@ -39,35 +39,19 @@ class App extends Component {
     const { authenticated, renderIndex } = this.state;
     let performanceDataIndex;
 
-    if (authenticated && renderIndex) {
+    if (authenticated) {
       performanceDataIndex = (
         <>
-          <button
-            className="ui button"
-            onClick={() => this.setState({ renderIndex: false })}
-          >
-            Hide past entries
-          </button>
           <DisplayPerformanceData
             updateIndex={this.state.updateIndex}
             indexUpdated={() => this.setState({ updateIndex: false })}
           />
         </>
       );
-    } else if (authenticated && !renderIndex) {
-      performanceDataIndex = (
-        <button
-          id="show-index"
-          className="ui button"
-          onClick={() => this.setState({ renderIndex: true })}
-        >
-          Show past entries
-        </button>
-      );
     }
 
     return (
-      <div className="ui main container">
+      <div id="main" className="ui main container">
         <Header
           renderLoginForm={this.state.renderLoginForm}
           authenticated={this.state.authenticated}
