@@ -1,5 +1,6 @@
 import React from "react";
 import { Line, Pie } from "react-chartjs-2";
+import { findRenderedComponentWithType } from "react-dom/test-utils";
 
 const PerformanceChart = ({ performanceData }) => {
   let renderChart;
@@ -22,7 +23,7 @@ const PerformanceChart = ({ performanceData }) => {
       ratings.filter(rating => rating.match("Above average")).length,
       ratings.filter(rating => rating.match("Excellent")).length
     ].reverse();
-    ratingsLabel = ["Poor", "Below average", "Average", "Above Average", "Excellent"].reverse()
+    ratingsLabel = ["Poor", "Below average", "Average", "Above Average", "Excellent"].reverse();
 
     
 
@@ -39,20 +40,11 @@ const PerformanceChart = ({ performanceData }) => {
     labels: dates,
     datasets: [
       {
-        label: "",
         fill: true,
         lineTension: 0.1,
-        backgroundColor: "rgba(34,186,69,0.4)",
-        borderColor: "rgba(34,186,69,1)",
-        borderCapStyle: "butt",
-        pointBorderColor: "rgb(169,169,169,1)",
-        pointBackgroundColor: "#fff",
-        pointBorderWidth: 5,
-        pointHoverRadius: 10,
-        pointHoverBorderColor: "rgba(220,220,220,1)",
-        pointHoverBorderWidth: 2,
-        pointRadius: 1,
-        pointHitRadius: 10,
+        backgroundColor: "rgba(244,164,96,0.5)",
+        borderColor: "rgba(244,164,96,1)",
+        pointHoverRadius: 5,
         data: distances
       }
     ]
@@ -61,13 +53,12 @@ const PerformanceChart = ({ performanceData }) => {
     labels: ratingsLabelValid,
     datasets: [
       {
-        label: "My First dataset",
         backgroundColor: [
-          'green',
-          'lime',
-          'yellow',
-          'orange',
-          'red'
+          'MediumSeaGreen',
+          'DeepSkyBlue',
+          'rgba(237, 243, 175)',
+          'SandyBrown',
+          'rgba(255, 127, 80, 1)',
           ],
         data: ratingsCountValid
       }
@@ -83,35 +74,67 @@ const PerformanceChart = ({ performanceData }) => {
         display: true,
         scaleLabel: {
           display: true,
-          labelString: 'Date'
+          labelString: 'Date',
+          fontColor: 'white',
+          fontSize: 16,
+        },
+        ticks: {
+          fontColor: 'white',
+          fontSize: 12,
+          maxRotation: 30,
+          minRotation: 30
         },
         gridLines: {
-          color: "rgba(0, 0, 0, 0)",
+          color: 'rgba(255, 255, 255, 0.1)',
         }
       }],
       yAxes: [{
         display: true,
         scaleLabel: {
           display: true,
-          labelString: 'Distance'
+          labelString: 'Distance',
+          fontColor: 'white',
+          fontSize: 16,
+        },
+        ticks: {
+          fontColor: 'white',
+          fontSize: 12,
         },
         gridLines: {
-          color: "rgba(0, 0, 0, 0)",
+          color: 'rgba(255, 255, 255, 0.1)',
         }
-      }]
+      }],
     }
   };
+
+  const pieChartOptions = {
+    legend: {
+      labels: {
+          fontColor: "white",
+          fontSize: 14
+      },
+      scales: {
+        yAxes: [{
+            ticks: {
+                fontColor: "white",
+                fontSize: 14,
+            }
+        }],
+
+    }
+  },
+  }
 
   if (performanceData) {
     renderChart = (
       <div className="ui stackable two column grid">
-        <div className="column">
+        <div className="column" id="chart">
           <h2>Your progress</h2>
           <Line data={lineChartData} options={lineChartOptions} />
         </div>
-        <div className="column">
+        <div className="column" id="chart">
           <h2>Your fitness ratings</h2>
-          <Pie data={pieChartData} />
+          <Pie data={pieChartData} options={pieChartOptions} />
         </div>
       </div>
     );

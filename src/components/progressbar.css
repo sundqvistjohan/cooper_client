@@ -1,14 +1,23 @@
 #progress-bar {
   margin-top: 20px;
-  margin-bottom: 20px;
-  border: 1px solid;
+  margin-bottom: 80px;
+  margin-left: -2px;
+  margin-right: -2px;
+  border: 2px solid;
   border-radius: 4px;
   height: 24px;
   position: relative;
 }
 
 #filler {
-  background: #22ba45;
+  background: MediumSeaGreen;
   height: 100%;
 }
 
+#rating {
+  position: absolute;
+  text-align: right;
+  border-right: 1px solid;
+  padding-top: 6px;
+  padding-right: 6px;
+}

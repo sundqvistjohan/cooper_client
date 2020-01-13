@@ -34,16 +34,23 @@ class DisplayPerformanceData extends Component {
             let indexDate = item.updated_at
             indexDate = indexDate.substring(0, indexDate.indexOf("T"));
             
-            return <div key={item.id}>{indexDate}: Distance: {item.data.distance} Rating: {item.data.message}</div>
+            return (
+              <div key={item.id} className="column">
+                <strong id="entry-header">{indexDate}</strong><br>
+                </br>Distance: {item.data.distance}<br>
+                </br> Rating: {item.data.message}
+                </div>
+            )
           })}
         </>
       )
     }
 
     return (
-      <div id="index">
-        <h3>Your fitness progress:</h3>
-        {dataIndex}
+      <div id="user-history">
+        <div className="ui six column stackable grid">
+          {dataIndex}
+        </div>
         <PerformanceChart performanceData={this.state.performanceData} />
       </div>
     )

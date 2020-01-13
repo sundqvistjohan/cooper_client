@@ -42,32 +42,35 @@ class App extends Component {
     if (authenticated && renderIndex) {
       performanceDataIndex = (
         <>
-          <button
-            className="ui button"
-            onClick={() => this.setState({ renderIndex: false })}
-          >
-            Hide past entries
-          </button>
+         <button	
+          id="show-index"	
+          className="ui large inverted basic fluid button"	
+          onClick={() => this.setState({ renderIndex: false })}	
+        >	
+          Show performance history<br></br>
+          <i class="angle double up icon" style={{ padding: '4px' }}></i>	
+        </button>
           <DisplayPerformanceData
             updateIndex={this.state.updateIndex}
             indexUpdated={() => this.setState({ updateIndex: false })}
           />
         </>
       );
-    } else if (authenticated && !renderIndex) {
-      performanceDataIndex = (
-        <button
-          id="show-index"
-          className="ui button"
-          onClick={() => this.setState({ renderIndex: true })}
-        >
-          Show past entries
+    } else if (authenticated && !renderIndex) {	
+      performanceDataIndex = (	
+        <button	
+          id="show-index"	
+          className="ui large inverted basic fluid button"	
+          onClick={() => this.setState({ renderIndex: true })}	
+        >	
+          Show performance history<br></br>
+          <i class="angle double down icon" style={{ padding: '4px' }}></i>	
         </button>
       );
     }
 
     return (
-      <div className="ui main container">
+      <div id="main" className="ui main container">
         <Header
           renderLoginForm={this.state.renderLoginForm}
           authenticated={this.state.authenticated}
@@ -84,8 +87,8 @@ class App extends Component {
           entryHandler={() =>
             this.setState({ entrySaved: true, updateIndex: true })
           }
-          />
-          {performanceDataIndex}
+        />
+        {performanceDataIndex}
       </div>
     );
   }
