@@ -48,7 +48,6 @@ class DisplayPerformanceData extends Component {
 
     return (
       <div id="user-history">
-        <h1 className="ui inverted dividing header">Your fitness history</h1>
         <div className="ui six column stackable grid">
           {dataIndex}
         </div>
