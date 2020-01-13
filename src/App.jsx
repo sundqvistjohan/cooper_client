@@ -47,7 +47,7 @@ class App extends Component {
           className="ui large inverted basic fluid button"	
           onClick={() => this.setState({ renderIndex: false })}	
         >	
-          Show performance history<br></br>
+          Hide performance history<br></br>
           <i class="angle double up icon" style={{ padding: '4px' }}></i>	
         </button>
           <DisplayPerformanceData

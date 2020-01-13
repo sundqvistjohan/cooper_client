@@ -27,7 +27,7 @@ const DisplayCooperResult = ({
       </button>
     );
   } else if (authenticated && entrySaved) {
-    renderSaveEntry = <p id="response-message">Your result was saved</p>;
+    renderSaveEntry = <p id="response-message right" style={{ textAlign: "right"}}>Your result was saved</p>;
   }
 
   return (
